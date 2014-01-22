@@ -3,7 +3,7 @@
 Plugin Name: Resize RSS Images
 Plugin URI: http://wpalchemists.com
 Description: Adds HTML to make images smaller in RSS feeds  
-Version: 1
+Version: 1.1
 Author: Jonathan Kay and Morgan Kay
 Author URI: http://wpalchemists.com
 License:           GPL-2.0+
@@ -17,15 +17,17 @@ function wpa_resize_admin_menu()
     add_options_page('RSS Image Resize', 'RSS Image Resize', 'manage_options', 'rss-image-resize/options.php');
 }
 
-$options = get_option('rss-image-resize');
 
-if($options['width']) {
-	$width = $options['width'];
-} else {
-	$width = '500';
-}
 
 function wpa_resize_image($matches){
+
+	$options = get_option('rss-image-resize');
+
+	if($options['width']) {
+		$width = $options['width'];
+	} else {
+		$width = '500';
+	}
 
 	if (preg_match('/width=(["\'])(.+?)\1/i', $matches[0], $classdata)){
 		if ($classdata[2] > $width){
